@@ -1,27 +1,27 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
+# Copyright (C) 2022 The OrangeFox Recovery Project
+#
 
 DEVICE_PATH := device/xiaomi/alioth
 
 # Architecture
 TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-a
+TARGET_ARCH_VARIANT := armv8-2a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := generic
-TARGET_CPU_VARIANT_RUNTIME := kryo385
+TARGET_CPU_VARIANT := cortex-a76
+TARGET_CPU_VARIANT_RUNTIME := kryo585
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv8-a
+TARGET_2ND_ARCH_VARIANT := armv8-2a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := generic
-TARGET_2ND_CPU_VARIANT_RUNTIME := kryo385
+TARGET_2ND_CPU_VARIANT := cortex-a55
+TARGET_2ND_CPU_VARIANT_RUNTIME := kryo585
 
-#64 Bit Support
 TARGET_USES_64_BIT_BINDER := true
-TARGET_SUPPORTS_64_BIT_APPS := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := kona
@@ -68,12 +68,33 @@ BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt/dtbs
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+# Kernel
+# -----------------------------------------------------
+# whether to do an inline build of the kernel sources
+ifeq ($(FOX_BUILD_FULL_KERNEL_SOURCES),1)
+    TARGET_KERNEL_SOURCE := kernel/xiaomi/alioth
+    TARGET_KERNEL_CONFIG := vendor/alioth-fox_defconfig
+    TARGET_KERNEL_CLANG_COMPILE := true
+    KERNEL_SUPPORTS_LLVM_TOOLS := true
+    TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
+    # clang-r383902 = 11.0.1; clang-r416183b = 12.0.5; clang-r416183b1 = 12.0.7;
+    # clang_13.0.0 (proton-clang 13.0.0, symlinked into prebuilts/clang/host/linux-x86/clang_13.0.0); clang-13+ is needed for Arrow-12.1 kernel sources
+    TARGET_KERNEL_CLANG_VERSION := clang_13.0.0
+    TARGET_KERNEL_CLANG_PATH ?= $(BUILD_TOP)/prebuilts/clang/host/linux-x86/$(TARGET_KERNEL_CLANG_VERSION)
+else
+    TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image
+    BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+    BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt/dtbs
+    BOARD_INCLUDE_RECOVERY_DTBO := true
+    BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+endif
+# -----------------------------------------------------
 
-BOARD_INCLUDE_RECOVERY_DTBO := true
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+# 12.1 manifest requirements
+TARGET_SUPPORTS_64_BIT_APPS := true
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+BUILD_BROKEN_MISSING_REQUIRED_MODULES := true # may not really be needed
 
 #A/B
 BOARD_USES_RECOVERY_AS_BOOT := true
@@ -126,10 +147,11 @@ TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
-TW_DEFAULT_BRIGHTNESS := 1200
+TW_DEFAULT_BRIGHTNESS := 750
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 TARGET_USES_MKE2FS := true
 TW_NO_SCREEN_BLANK := true
 TW_EXCLUDE_APEX := true
 TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+#

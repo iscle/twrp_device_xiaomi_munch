@@ -1,6 +1,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
+# Copyright (C) 2022 The OrangeFox Recovery Project
+#
 
 DEVICE_PATH := device/xiaomi/alioth
 
@@ -68,10 +70,6 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock.recovery \
     fastbootd 
 
-# fastbootd
-PRODUCT_PACKAGES += \
-    fastbootd
-
 # Qcom decryption
 PRODUCT_PACKAGES += \
     qcom_decrypt \
@@ -85,11 +83,19 @@ PRODUCT_SOONG_NAMESPACES += \
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
-BOARD_USES_METADATA_PARTITION := true
-PLATFORM_SECURITY_PATCH := 2099-12-31
-VENDOR_SECURITY_PATCH := 2099-12-31
-PLATFORM_VERSION := 16.1.0
 BOARD_USES_QCOM_FBE_DECRYPTION := true
+BOARD_USES_METADATA_PARTITION := true
+
+# platform
+PLATFORM_VERSION := 127
+PLATFORM_SECURITY_PATCH := 2127-12-31
+PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
+
+# vendor
+VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+
+# Set boot SPL
+BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 TARGET_RECOVERY_DEVICE_MODULES += libion libandroidicu vendor.display.config@1.0 vendor.display.config@2.0 libdisplayconfig.qti
 
@@ -113,3 +119,4 @@ PRODUCT_COPY_FILES += \
 # OEM otacert
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     vendor/recovery/security/miui
+#
