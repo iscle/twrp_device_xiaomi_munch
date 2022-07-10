@@ -110,11 +110,6 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@2.0.so \
     $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/libdisplayconfig.qti.so
 
-#Copy Out Extra Stuff
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/prebuilt/modules,$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/modules) \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/prebuilt/firmware,$(TARGET_COPY_OUT_RECOVERY)/root/vendor/firmware)
-
 # OEM otacert
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     vendor/recovery/security/miui
