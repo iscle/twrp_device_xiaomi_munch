@@ -34,8 +34,10 @@ if [ -z "$1" -a -z "$FOX_BUILD_DEVICE" ]; then
 fi
 
 if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
+	export FOX_VARIANT="A12"
 	export OF_USE_GREEN_LED=0
-        export FOX_ENABLE_APP_MANAGER=0
+        export FOX_ENABLE_APP_MANAGER=1
+        export OF_IGNORE_LOGICAL_MOUNT_ERRORS=1
    	export TW_DEFAULT_LANGUAGE="en"
 	export LC_ALL="C"
  	export ALLOW_MISSING_DEPENDENCIES=true
@@ -54,12 +56,13 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_USE_XZ_UTILS=1
 	export OF_ENABLE_LPTOOLS=1
 	export FOX_USE_NANO_EDITOR=1
-        export OF_QUICK_BACKUP_LIST="/boot;/data;"
+        #export OF_QUICK_BACKUP_LIST="/boot;/data;"
+        export OF_QUICK_BACKUP_LIST="/boot;/super;"
         export FOX_DELETE_AROMAFM=1
         export FOX_BUGGED_AOSP_ARB_WORKAROUND="1616300800"; # Sun 21 Mar 04:26:40 GMT 2021
 
-	# use magisk 24.3 for the magisk addon
-	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v24.3.zip
+	# use magisk 25.1 for the magisk addon
+	export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-v25.1.zip
 
 	# screen settings
 	export OF_SCREEN_H=2400
@@ -71,9 +74,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 
 	# maximum permissible splash image size (in kilobytes)
 	#export OF_SPLASH_MAX_SIZE=2048
-
-	# run a process after formatting data to recreate /data/media/0 (only when forced-encryption is being disabled)
-	export OF_RUN_POST_FORMAT_PROCESS=1
 
 	# ensure that /sdcard is bind-unmounted before f2fs data repair or format
 	export OF_UNBIND_SDCARD_F2FS=1
