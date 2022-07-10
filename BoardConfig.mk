@@ -67,10 +67,11 @@ BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
-BOARD_MKBOOTIMG_ARGS += --cmdline "twrpfastboot=1"
 
 # Kernel
 # -----------------------------------------------------
+KERNEL_PATH := $(DEVICE_PATH)/prebuilt
+
 # whether to do an inline build of the kernel sources
 ifeq ($(FOX_BUILD_FULL_KERNEL_SOURCES),1)
     TARGET_KERNEL_SOURCE := kernel/xiaomi/alioth
@@ -80,14 +81,16 @@ ifeq ($(FOX_BUILD_FULL_KERNEL_SOURCES),1)
     TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
     # clang-r383902 = 11.0.1; clang-r416183b = 12.0.5; clang-r416183b1 = 12.0.7;
     # clang_13.0.0 (proton-clang 13.0.0, symlinked into prebuilts/clang/host/linux-x86/clang_13.0.0); clang-13+ is needed for Arrow-12.1 kernel sources
-    TARGET_KERNEL_CLANG_VERSION := clang_13.0.0
-    TARGET_KERNEL_CLANG_PATH ?= $(BUILD_TOP)/prebuilts/clang/host/linux-x86/$(TARGET_KERNEL_CLANG_VERSION)
+    TARGET_KERNEL_CLANG_VERSION := 13.0.0
+    TARGET_KERNEL_CLANG_PATH := $(shell pwd)/prebuilts/clang/host/linux-x86/clang-$(TARGET_KERNEL_CLANG_VERSION)
+    TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/$(HOST_OS)-x86/dtc/dtc
 else
-    TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image
-    BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
-    BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt/dtbs
-    BOARD_INCLUDE_RECOVERY_DTBO := true
-    BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+    TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/Image
+    TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/Image.gz-dtb
+    BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_PATH)/dtbo.img
+#    BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_PATH)/dtbs
+#    BOARD_INCLUDE_RECOVERY_DTBO := true
+#    BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 endif
 # -----------------------------------------------------
 
