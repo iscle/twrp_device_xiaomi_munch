@@ -42,8 +42,5 @@ set_read_write_partitions() {
 }
 
 set_read_write_partitions;
-sleep 1;
-resetprop "ro.dynamic.full_size" "9126805504";
-sleep 1;
 exit 0;
 #
