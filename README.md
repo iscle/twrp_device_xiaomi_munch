@@ -26,7 +26,7 @@ The Xiaomi Mi 11X (codenamed _"aliothin"_) and Redmi K40 / POCO F3 (codenamed _"
 **Works**
 
 - Booting.
-- **Decryption** (Android 11 and Android 12+)
+- **Decryption** (Android 12+)
 - ADB
 - MTP
 - OTG
@@ -48,4 +48,4 @@ lunch twrp-alioth_eng && mka adbd bootimage
 
 ## Credits
 - [Original Tree By Nebrassy](https://github.com/TeamWin/android_device_xiaomi_alioth)
-- [InfiniR kernel](https://github.com/raystef66/InfiniR_kernel_alioth.git)
+- [PixelPlusUI kernel](https://github.com/PixelPlusUI-Devices/kernel_xiaomi_alioth)
