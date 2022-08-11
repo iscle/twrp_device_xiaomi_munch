@@ -6,6 +6,9 @@
 
 DEVICE_PATH := device/xiaomi/alioth
 
+# fscrypt policy
+TW_USE_FSCRYPT_POLICY := 2
+
 # Inherit from common AOSP config
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
