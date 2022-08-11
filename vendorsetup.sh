@@ -56,8 +56,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_USE_XZ_UTILS=1
 	export OF_ENABLE_LPTOOLS=1
 	export FOX_USE_NANO_EDITOR=1
-        #export OF_QUICK_BACKUP_LIST="/boot;/data;"
-        export OF_QUICK_BACKUP_LIST="/boot;/super;"
+        export OF_QUICK_BACKUP_LIST="/boot;/data;"
         export FOX_DELETE_AROMAFM=1
         export FOX_BUGGED_AOSP_ARB_WORKAROUND="1616300800"; # Sun 21 Mar 04:26:40 GMT 2021
 
