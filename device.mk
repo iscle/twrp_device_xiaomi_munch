@@ -90,16 +90,21 @@ BOARD_USES_QCOM_FBE_DECRYPTION := true
 BOARD_USES_METADATA_PARTITION := true
 
 # platform
-PLATFORM_VERSION := 127
+PLATFORM_VERSION := 99.87.36
+
+# Platform security
 PLATFORM_SECURITY_PATCH := 2127-12-31
+
+# Last stable
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 
-# vendor
+# Vendor security
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 # Set boot SPL
 BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
+# Modules
 TARGET_RECOVERY_DEVICE_MODULES += libion vendor.display.config@1.0 vendor.display.config@2.0 libdisplayconfig.qti
 
 # Vibrator
