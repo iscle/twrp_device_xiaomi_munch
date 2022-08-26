@@ -88,9 +88,6 @@ else
     TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/Image
     TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/Image.gz-dtb
     BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_PATH)/dtbo.img
-#    BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_PATH)/dtbs
-#    BOARD_INCLUDE_RECOVERY_DTBO := true
-#    BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 endif
 # -----------------------------------------------------
 
