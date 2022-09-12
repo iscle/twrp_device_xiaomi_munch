@@ -31,7 +31,6 @@ The POCO F4 (codenamed _"munch"_) is a high end smartphone from POCO.
 - MTP
 - OTG
 - vA/B partition functions
-- Vibration
 
 POCO F4 uses a Virtual A/B Partition Scheme!
 
