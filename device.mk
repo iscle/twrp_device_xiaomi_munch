@@ -107,10 +107,6 @@ BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 # Modules
 TARGET_RECOVERY_DEVICE_MODULES += libion vendor.display.config@1.0 vendor.display.config@2.0 libdisplayconfig.qti
 
-# Vibrator
-PRODUCT_PACKAGES += \
-    vendor.qti.hardware.vibrator.service
-
 #Display
 RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
@@ -121,4 +117,3 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
 # OEM otacert
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     vendor/recovery/security/miui
-#

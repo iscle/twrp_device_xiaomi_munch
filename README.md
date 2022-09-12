@@ -1,11 +1,11 @@
-# OrangeFox device tree for Xiaomi Mi 11X / Redmi K40 / POCO F3 (alioth)
-For building OrangeFox Recovery for Xiaomi Mi 11X / Redmi K40 / POCO F3
+# OrangeFox device tree for POCO F4 (munch)
+For building OrangeFox Recovery for POCO F4
 
-The Xiaomi Mi 11X (codenamed _"aliothin"_) and Redmi K40 / POCO F3 (codenamed _"alioth"_) are mid range smartphones from Xiaomi.
+The POCO F4 (codenamed _"munch"_) is a high end smartphone from POCO.
 
 ## Device specifications
 
-| Device       | Xiaomi Mi 11X / Redmi K40 / POCO F3         |
+| Device       | POCO F4                                     |
 | -----------: | :------------------------------------------ |
 | SoC          | Qualcomm SM8250 Snapdragon 870 5G           |
 | CPU          | 8x Qualcomm® Kryo™ 585 up to 2.84GHz        |
@@ -13,13 +13,13 @@ The Xiaomi Mi 11X (codenamed _"aliothin"_) and Redmi K40 / POCO F3 (codenamed _"
 | Memory       | 8GB / 6GB  (LPDDR 5)                        |
 | Shipped Android version | 11                               |
 | Storage      | 128GB  (UFS 3.1)                            |
-| Battery      | Li-Po 4520 mAh, non-removable               |
-| Dimensions   | 163.7 x 76.4 x 7.8 mm                       |
+| Battery      | Li-Po 4500 mAh, non-removable               |
+| Dimensions   | 163.2 x 75.95 x 7.7 mm                       |
 | Display      | 1080 x 2400 (20:9), 6.67 inches             |
 
 ## Device picture
 
-![Xiaomi Mi 11X](https://i01.appmifile.com/webfile/globalimg/7/7BFCB70B-C506-E089-8591-9F2A15CA61FE.png)
+![POCO F4](https://i01.appmifile.com/webfile/globalimg/pic/POCO-F4-BLACK!800x800!85.png)
 
 ## Features
 
@@ -33,7 +33,7 @@ The Xiaomi Mi 11X (codenamed _"aliothin"_) and Redmi K40 / POCO F3 (codenamed _"
 - vA/B partition functions
 - Vibration
 
-Mi 11X / Redmi K40 / POCO F3 uses a Virtual A/B Partition Scheme!
+POCO F4 uses a Virtual A/B Partition Scheme!
 
 ## Compile
 
@@ -41,11 +41,11 @@ You can find a full compile guide for OrangeFox [Here](https://wiki.orangefox.te
 
 Lunch command :
 ```
-lunch twrp-alioth_eng && mka adbd bootimage
+lunch twrp_munch-eng && mka adbd bootimage
 ```
 
 
 
 ## Credits
-- [Original Tree By Nebrassy](https://github.com/TeamWin/android_device_xiaomi_alioth)
+- [Original Tree By Darth9](https://gitlab.com/OrangeFox/device/alioth)
 - [PixelPlusUI kernel](https://github.com/PixelPlusUI-Devices/kernel_xiaomi_alioth)

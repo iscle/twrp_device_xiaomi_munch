@@ -71,24 +71,8 @@ BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 # Kernel
 # -----------------------------------------------------
 KERNEL_PATH := $(DEVICE_PATH)/prebuilt
-
-# whether to do an inline build of the kernel sources
-ifeq ($(FOX_BUILD_FULL_KERNEL_SOURCES),1)
-    TARGET_KERNEL_SOURCE := kernel/xiaomi/munch
-    TARGET_KERNEL_CONFIG := vendor/munch-fox_defconfig
-    TARGET_KERNEL_CLANG_COMPILE := true
-    KERNEL_SUPPORTS_LLVM_TOOLS := true
-    TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
-    # clang-r383902 = 11.0.1; clang-r416183b = 12.0.5; clang-r416183b1 = 12.0.7;
-    # clang_13.0.0 (proton-clang 13.0.0, symlinked into prebuilts/clang/host/linux-x86/clang_13.0.0); clang-13+ is needed for Arrow-12.1 kernel sources
-    TARGET_KERNEL_CLANG_VERSION := 13.0.0
-    TARGET_KERNEL_CLANG_PATH := $(shell pwd)/prebuilts/clang/host/linux-x86/clang-$(TARGET_KERNEL_CLANG_VERSION)
-    TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/$(HOST_OS)-x86/dtc/dtc
-else
-    TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/Image
-    TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/Image.gz-dtb
-    BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_PATH)/dtbo.img
-endif
+TARGET_PREBUILT_KERNEL := $(KERNEL_PATH)/Image.gz-dtb
+BOARD_PREBUILT_DTBOIMAGE := $(KERNEL_PATH)/dtbo.img
 # -----------------------------------------------------
 
 # 12.1 manifest requirements
@@ -147,11 +131,10 @@ TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
-TW_DEFAULT_BRIGHTNESS := 750
+TW_DEFAULT_BRIGHTNESS := 511
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 TARGET_USES_MKE2FS := true
 TW_NO_SCREEN_BLANK := true
 TW_EXCLUDE_APEX := true
-TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-#
+TW_NO_HAPTICS := true
