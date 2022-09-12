@@ -4,7 +4,7 @@
 # Copyright (C) 2022 The OrangeFox Recovery Project
 #
 
-DEVICE_PATH := device/xiaomi/alioth
+DEVICE_PATH := device/xiaomi/munch
 
 # Architecture
 TARGET_ARCH := arm64
@@ -74,8 +74,8 @@ KERNEL_PATH := $(DEVICE_PATH)/prebuilt
 
 # whether to do an inline build of the kernel sources
 ifeq ($(FOX_BUILD_FULL_KERNEL_SOURCES),1)
-    TARGET_KERNEL_SOURCE := kernel/xiaomi/alioth
-    TARGET_KERNEL_CONFIG := vendor/alioth-fox_defconfig
+    TARGET_KERNEL_SOURCE := kernel/xiaomi/munch
+    TARGET_KERNEL_CONFIG := vendor/munch-fox_defconfig
     TARGET_KERNEL_CLANG_COMPILE := true
     KERNEL_SUPPORTS_LLVM_TOOLS := true
     TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-gnu-
